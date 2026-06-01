@@ -1,0 +1,20 @@
+services:
+  grafana_max_alert:
+    image: grafana_max_alert
+    build:
+      context: .
+    restart: always
+    container_name: grafana_max_alert
+    env_file:
+      - .env
+    command: ["python", "main.py"]
+    networks:
+      default:
+        aliases:
+          - "grafana_max_alert"
+       
+
+networks:
+  default:
+    name: zabbix_network
+    external: true
