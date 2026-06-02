@@ -14,8 +14,8 @@ app = FastAPI()
 async def send_message_to_max(data: GrafanaPayload):
     # print(data)
     answer = ""
-    for alert in data.alerts:
-        answer += f"{alert["annotations"]["summary"]}\n"
+    for label in data.commonLabels:
+        answer += f"{label.values()}\n"
     await bot.send_message(settings.MAX_CHAT_ID, text=answer)
 
 
