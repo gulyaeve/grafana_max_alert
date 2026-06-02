@@ -13,10 +13,11 @@ app = FastAPI()
 @app.post("/")
 async def send_message_to_max(data: GrafanaPayload):
     print(data)
-    answer = ""
-    for label in data.commonLabels:
-        answer += f"{label}\n"
-    await bot.send_message(settings.MAX_CHAT_ID, text=answer)
+    custom_string = "\n".join(f"{k}: {v}" for k, v in data.commonLabels.items())
+    # answer = ""
+    # for label in data.commonLabels:
+    #     answer += f"{label}\n"
+    await bot.send_message(settings.MAX_CHAT_ID, text=custom_string)
 
 
 if __name__ == "__main__":
