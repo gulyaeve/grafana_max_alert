@@ -1,11 +1,30 @@
+from datetime import datetime
+from typing import List
+
 from pydantic import BaseModel
+
+
+class GrafanaAlert(BaseModel):
+    status: str
+    labels: dict
+    annotations: dict
+    startsAt: datetime
+    endsAt: datetime
+    generatorURL: str
+    fingerprint: str
+    silenceURL: str
+    panelURL: str
+    values: dict
+    valueString: list
+    orgId: int
+
 
 
 class GrafanaPayload(BaseModel):
     receiver: str
     status: str
 
-    alerts: list
+    alerts: List[GrafanaAlert]
     groupLabels: dict
 
     commonLabels: dict
@@ -15,6 +34,12 @@ class GrafanaPayload(BaseModel):
     groupKey: str
     truncatedAlerts: int
 
+    def __str__(self):
+        result = ""
+        for alert in self.alerts:
+            result += "\n".join(f"{k}: {v}" for k, v in alert.labels.items())
+            result += "\n"
+        return result
 
 """
 receiver='webhook'
