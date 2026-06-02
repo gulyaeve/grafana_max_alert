@@ -38,7 +38,7 @@ class GrafanaPayload(BaseModel):
         result = ""
         for alert in self.alerts:
             result += "\n".join(f"{k}: {v}" for k, v in alert["labels"].items())
-            result += "\n"
+            result += "\n\n"
         return result
 
 """
