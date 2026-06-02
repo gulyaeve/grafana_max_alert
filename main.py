@@ -12,7 +12,7 @@ app = FastAPI()
 
 @app.post("/")
 async def send_message_to_max(data: GrafanaPayload):
-    # print(data)
+    print(data)
     answer = ""
     for label in data.commonLabels:
         answer += f"{label.values()}\n"
