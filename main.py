@@ -1,20 +1,19 @@
+
 from fastapi import FastAPI
 from maxapi import Bot
 import uvicorn
 from config import settings
-
+from schemas import GrafanaPayload
 
 
 bot = Bot(settings.MAX_BOT_TOKEN)
-
-
 app = FastAPI()
 
 
 @app.post("/")
-async def send_message_to_max(data):
+async def send_message_to_max(data: GrafanaPayload):
     print(data)
-    await bot.send_message(settings.MAX_CHAT_ID, text=data)
+    await bot.send_message(settings.MAX_CHAT_ID, text=data.summary)
 
 
 if __name__ == "__main__":
