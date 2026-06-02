@@ -15,7 +15,7 @@ async def send_message_to_max(data: GrafanaPayload):
     print(data)
     answer = ""
     for label in data.commonLabels:
-        answer += f"{label.values()}\n"
+        answer += f"{label}\n"
     await bot.send_message(settings.MAX_CHAT_ID, text=answer)
 
 
