@@ -12,7 +12,7 @@ app = FastAPI()
 
 @app.post("/")
 async def send_message_to_max(data: GrafanaPayload):
-    print(data)
+    print(str(data))
     await bot.send_message(settings.MAX_CHAT_ID, text=str(data))
 
 
