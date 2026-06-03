@@ -37,8 +37,10 @@ class GrafanaPayload(BaseModel):
     def __str__(self):
         result = ""
         for alert in self.alerts:
-            result += "\n".join(f"{k}: {v}" for k, v in alert["labels"].items())
-            result += "\n\n"
+            # result += "\n".join(f"{k}: {v}" for k, v in alert["labels"].items())
+            if alert["labels"]["alertname"] == "itmoscow visors":
+                result += f"<b>{alert["labels"].get("email")}</b>\n<i>{alert["labels"].get("message")}</i>"
+                result += "\n\n"
         return result
 
 """
